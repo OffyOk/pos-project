@@ -1,0 +1,57 @@
+for initial setup this "Pos" project
+
+1. create app
+npx create-react-app {name}
+
+2. install all need library
+npm i bootstrap react-bootstrap react-router-dom react-redux @reduxjs/toolkit axios react-hook-form lodash mdb-react-ui-kit
+
+3. config ให้ workspace format on save และไป config file > settings.json เพื่อ set default format เป็น prettier
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.associations": {
+    "*.js": "javascriptreact"
+  }
+}
+
+4. prettierrc ทำให้ " กลายเป็น ' โดย default
+{
+  "singleQuote": true
+}
+
+5. jsconfig.json ทำให้สามารถ import ไฟล์จาก folder อื่นได้จาก root project path ได้ หลีกเลี่ยงปัญหาจากการใช้ relative path
+{
+  "compilerOptions": {
+    "baseUrl": "src"
+  }
+}
+
+6. .env ตอนนี้ใช้แค่เก็บ path url ของ api แค่นั้น
+REACT_APP_API = 'http://localhost:5000'
+
+7. วางโครงสร้าง project (เพื่อให้มีความเป็นระเบียบและง่ายต่อการค้นหา)
+index
+  - App.js                       // ใช้ provider ให้เพื่อให้ store รู้จักกับ component ต่างๆ และทำให้ component ต่างๆ สามารถนำค่าจาก store ไปใช้ได้ กันได้และทำ Browse กับ Route ไปยัง path ต่างๆ
+    - app
+        - store.js              // ใช้เก็บชุดข้อมูลต่างๆของ reducer นั้นๆ โดยสร้างถังขึ้นมาด้วย configureStore และใส่ค่า url เริ่มต้นให้ axios ด้วย axios.defaults.baseURL = process.env.REACT_APP_API;
+        - utils.js              // เก็บ function ที่ใช้บ่อย
+    - features
+        - cart
+            - Cart.js           // หน้าตะกร้าสินค้า
+            - cartSlice.js      // ทำ cartReducer สำหรับส่ง state ไปที่ store ด้วย createSlice และส่งออกไปด้วย cartReducer.reducer 
+            - Order.js          // หน้าแสดง Order ที่ส่งไปแล้ว
+            - CustomerInfo.js   // ทำ form สำหรับใส่ ข้อมูล Customer
+            - OrderDetails.js   // ทำขึ้นมาใส่ detail ของสินค้าที่ใส่มาในตะกร้าและราคารวมด้วย lodash
+        - product
+            - ProductForm.js    // ทำ form สำหรับใส่ข้อมูลสินค้า
+            - NewProduct.js     // 
+            - ViewProduct.js    //
+            - EditProduct.js    //
+            - DeleteProduct.js  //
+            - Products.js       // หน้าแสดงสินค้าทุกตัว
+            - ProducctItem.js   // ทำ card สินค้าแต่ละตัวโดยรับค่า product มาจาก Products.js เพื่อเอาข้อมูลมาใช้แสดงใน card และนำ QuantityControl มาแสดงในส่วนของ footer ของ card
+            - QuantityControl.js   // แสดงค่าของ product ใน cart ตอนนี้ด้วย useSelector และ แสดงปุ่มเพิ่มลดจำนวนสินค้าสำหรับทำ action เพิ่มลด product ใน cart ด้วย dispatch(add, remove)
+        - ui
+            - Layout.js         // เป็น layout ที่จะมีเหมือนกันทุกหน้าอย่ง navbar และ load หน้า route ของ child ตาม path ณ ตอนนั้นออกมาด้วย outlet

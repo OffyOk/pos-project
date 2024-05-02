@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+      .column {
+        width: 45%;
+        border: 1px solid #ccc;
+        padding: 10px;
+        overflow-y: auto;
+        max-height: 200px;
+      }
+      .btn {
+        display: block;
+        margin-bottom: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="column" id="fruitColumn">
+        <div class="btn" onclick="moveItem('Apple')">Apple</div>
+        <div class="btn" onclick="moveItem('Banana')">Banana</div>
+        <div class="btn" onclick="moveItem('Orange')">Orange</div>
+        <div class="btn" onclick="moveItem('Mango')">Mango</div>
+        <div class="btn" onclick="moveItem('Pineapple')">Pineapple</div>
+        <div class="btn" onclick="moveItem('Watermelon')">Watermelon</div>
+      </div>
+      <div class="column" id="vegetableColumn">
+        <div class="btn" onclick="moveItem('Broccoli')">Broccoli</div>
+        <div class="btn" onclick="moveItem('Mushroom')">Mushroom</div>
+        <div class="btn" onclick="moveItem('Tomato')">Tomato</div>
+        <div class="btn" onclick="moveItem('Cucumber')">Cucumber</div>
+        <div class="btn" onclick="moveItem('Carrot')">Carrot</div>
+      </div>
+    </div>
+    <script>
+      const mainList = [
+        { type: 'Fruit', name: 'Apple' },
+        { type: 'Vegetable', name: 'Broccoli' },
+        { type: 'Vegetable', name: 'Mushroom' },
+        { type: 'Fruit', name: 'Banana' },
+        { type: 'Vegetable', name: 'Tomato' },
+        { type: 'Fruit', name: 'Orange' },
+        { type: 'Fruit', name: 'Mango' },
+        { type: 'Fruit', name: 'Pineapple' },
+        { type: 'Vegetable', name: 'Cucumber' },
+        { type: 'Fruit', name: 'Watermelon' },
+        { type: 'Vegetable', name: 'Carrot' },
+      ];
+
+      function moveItem(itemName) {
+        const item = mainList.find((i) => i.name === itemName);
+        if (!item) return;
+
+        const fruitColumn = document.getElementById('fruitColumn');
+        const vegetableColumn = document.getElementById('vegetableColumn');
+
+        const isFruit = item.type === 'Fruit';
+
+        if (isFruit) {
+          fruitColumn.removeChild(
+            document.querySelector(`#fruitColumn .btn[data-name="${itemName}"]`)
+          );
+        } else {
+          vegetableColumn.removeChild(
+            document.querySelector(
+              `#vegetableColumn .btn[data-name="${itemName}"]`
+            )
+          );
+        }
+
+        setTimeout(() => {
+          if (isFruit) {
+            fruitColumn.innerHTML += `<div class="btn" onclick="moveItem('${itemName}')" data-name="${itemName}">${itemName}</div>`;
+          } else {
+            vegetableColumn.innerHTML += `<div class="btn" onclick="moveItem('${itemName}')" data-name="${itemName}">${itemName}</div>`;
+          }
+        }, 5000);
+
+        mainList.push(item);
+      }
+    </script>
+  </body>
+</html>
