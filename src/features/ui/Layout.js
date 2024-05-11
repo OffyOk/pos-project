@@ -91,9 +91,9 @@ const Layout = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Fake Store
+            Fake Store API
           </a>{' '}
-          API Coding by{' '}
+          Coding by{' '}
           <a
             className="text-white"
             href="https://www.linkedin.com/in/suthichai-srivatanasup/"
