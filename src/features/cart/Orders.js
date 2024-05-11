@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { isEmpty } from 'lodash';
 import { useEffect, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
@@ -9,8 +9,12 @@ const Orders = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const res = await axios.get('/orders');
-      setOrders(res.data);
+      // const res = await axios.get('/orders');
+      // setOrders(res.data);
+      const res = await fetch('https://fakestoreapi.com/carts');
+      const data = await res.json();
+      // console.log(data);
+      setOrders(data);
     };
 
     fetchOrders();

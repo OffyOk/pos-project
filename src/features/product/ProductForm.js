@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -14,7 +14,7 @@ const ProductForm = ({ currentProduct, onSubmit }) => {
     defaultValues: currentProduct,
   });
 
-  console.log('defaultValues:', currentProduct);
+  // console.log('defaultValues:', currentProduct);
 
   const submit = (formValue) => {
     // let priceValue = parseFloat(formValue.price);
@@ -32,17 +32,22 @@ const ProductForm = ({ currentProduct, onSubmit }) => {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const res = await axios.get('/categories');
-      setCategories(res.data);
+      // const res = await axios.get('/categories');
+      // setCategories(res.data);
+      const res = await fetch(
+        `${process.env.REACT_APP_API}/products/categories`
+      );
+      const data = await res.json();
+      setCategories(data);
     };
 
     fetchCategories();
   }, []);
 
-  console.log(errors);
+  // console.log(errors);
   return (
     <Form className="mb-3" onSubmit={handleSubmit(submit)}>
-      <Form.Group className="mb-3">
+      {/* <Form.Group className="mb-3">
         <Form.Label>SKU</Form.Label>
         <Form.Control
           placeholder="Enter SKU"
@@ -52,8 +57,8 @@ const ProductForm = ({ currentProduct, onSubmit }) => {
         <Form.Control.Feedback type="invalid">
           {errors.sku?.message}
         </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className="mb-3">
+      </Form.Group> */}
+      {/* <Form.Group className="mb-3">
         <Form.Label>Name</Form.Label>
         <Form.Control
           placeholder="Enter name"
@@ -62,6 +67,17 @@ const ProductForm = ({ currentProduct, onSubmit }) => {
         ></Form.Control>
         <Form.Control.Feedback type="invalid">
           {errors.name?.message}
+        </Form.Control.Feedback>
+      </Form.Group> */}
+      <Form.Group className="mb-3">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          placeholder="Enter name"
+          isInvalid={!!errors.title}
+          {...register('title', { required: 'name is a required field.' })}
+        ></Form.Control>
+        <Form.Control.Feedback type="invalid">
+          {errors.title?.message}
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
@@ -79,7 +95,7 @@ const ProductForm = ({ currentProduct, onSubmit }) => {
           {errors.price?.message}
         </Form.Control.Feedback>
       </Form.Group>
-      <Form.Group className="mb-3">
+      {/* <Form.Group className="mb-3">
         <Form.Label>Status</Form.Label>
         <Form.Select
           isInvalid={!!errors.status}
@@ -95,12 +111,11 @@ const ProductForm = ({ currentProduct, onSubmit }) => {
         <Form.Control.Feedback type="invalid">
           {errors.status?.message}
         </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group className="mb-3">
+      </Form.Group> */}
+      {/* <Form.Group className="mb-3">
         <Form.Label>Category</Form.Label>
         <Form.Select
           value={currentProduct ? currentProduct.categoryId : null}
-          isInvalid={!!errors.categoryId}
           {...register('categoryId', {
             validate: (v) =>
               v !== 'Select Category' || 'Category is required field.',
@@ -116,8 +131,28 @@ const ProductForm = ({ currentProduct, onSubmit }) => {
         <Form.Control.Feedback type="invalid">
           {errors.categoryId?.message}
         </Form.Control.Feedback>
-      </Form.Group>
+      </Form.Group> */}
       <Form.Group className="mb-3">
+        <Form.Label>Category</Form.Label>
+        <Form.Select
+          value={currentProduct ? currentProduct.category : null}
+          {...register('category', {
+            validate: (v) =>
+              v !== 'Select Category' || 'Category is required field.',
+          })}
+        >
+          <option value={null}>Select Category</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </Form.Select>
+        <Form.Control.Feedback type="invalid">
+          {errors.category?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+      {/* <Form.Group className="mb-3">
         <Form.Label>Details</Form.Label>
         <Form.Control
           as="textarea"
@@ -128,6 +163,21 @@ const ProductForm = ({ currentProduct, onSubmit }) => {
         ></Form.Control>
         <Form.Control.Feedback type="invalid">
           {errors.desc?.message}
+        </Form.Control.Feedback>
+      </Form.Group> */}
+      <Form.Group className="mb-3">
+        <Form.Label>Details</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
+          placeholder="Enter product details"
+          isInvalid={!!errors.description}
+          {...register('description', {
+            required: 'description is a required field.',
+          })}
+        ></Form.Control>
+        <Form.Control.Feedback type="invalid">
+          {errors.description?.message}
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">

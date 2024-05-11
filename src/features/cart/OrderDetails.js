@@ -8,6 +8,7 @@ const OrderDetails = ({ products, editable = true }) => {
     products,
     (product) => product.price * product.quantity
   );
+
   return (
     <>
       <ListGroup as="ol" numbered variant="flush">
@@ -18,12 +19,15 @@ const OrderDetails = ({ products, editable = true }) => {
             className="d-flex justify-content-between align-items-start"
           >
             <img
-              src={`${process.env.REACT_APP_API}/${product.image}`}
-              alt={`${product.name} image`}
+              // src={`${process.env.REACT_APP_API}/${product.image}`}
+              // alt={`${product.name} image`}
+              src={product.image}
+              alt={product.title}
               className="ms-2 order-details-image"
             />
             <div className="ms-2 flex-grow-1">
-              <div className="fw-bold">{product.name}</div>
+              {/* <div className="fw-bold">{product.name}</div> */}
+              <div className="fw-bold">{product.title}</div>
               {editable ? (
                 <QuantityControl product={product}></QuantityControl>
               ) : (

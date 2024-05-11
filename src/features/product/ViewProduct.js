@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useState, useEffect } from 'react';
 import {
   Container,
@@ -20,8 +20,12 @@ const ViewProduct = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const res = await axios.get(`/products/${id}`);
-      setProduct(res.data);
+      // const res = await axios.get(`/products/${id}`);
+      // setProduct(res.data);
+      const res = await fetch(`${process.env.REACT_APP_API}/products/${id}`);
+      const data = await res.json();
+
+      setProduct(data);
     };
 
     fetchProduct();
@@ -31,7 +35,10 @@ const ViewProduct = () => {
 
   const deleteProduct = async () => {
     try {
-      await axios.delete(`/products/${id}`);
+      // await axios.delete(`/products/${id}`);
+      await fetch(`${process.env.REACT_APP_API}/products/${id}`, {
+        method: 'DELETE',
+      });
       navigate('/products');
       dispatch(
         setAlert({
@@ -49,27 +56,32 @@ const ViewProduct = () => {
       <Row className="my-2">
         <Col md={4}>
           <img
-            src={`${process.env.REACT_APP_API}/${product.image}`}
-            alt={product.name}
+            // src={`${process.env.REACT_APP_API}/${product.image}`}
+            // alt={product.name}
+            src={product.image}
+            alt={product.title}
             className="w-100"
           />
         </Col>
         <Col md={8}>
           <Stack>
-            <p className="fs-6 fw-bold">SKU:</p>
-            <p className="ms-4">{product.sku}</p>
+            {/* <p className="fs-6 fw-bold">SKU:</p>
+            <p className="ms-4">{product.sku}</p> */}
             <p className="fs-6 fw-bold">Name:</p>
-            <p className="ms-4">{product.name}</p>
-            <p className="fs-6 fw-bold">Status:</p>
+            {/* <p className="ms-4">{product.name}</p> */}
+            <p className="ms-4">{product.title}</p>
+            {/* <p className="fs-6 fw-bold">Status:</p>
             <p className="ms-4">
               {product.status === 1 ? 'In Stock' : 'Out of Stock'}
-            </p>
+            </p> */}
             <p className="fs-6 fw-bold">Category:</p>
-            <p className="ms-4">{product.category.name}</p>
+            {/* <p className="ms-4">{product.category.name}</p> */}
+            <p className="ms-4">{product.category}</p>
             <p className="fs-6 fw-bold">Price:</p>
             <p className="ms-4">{product.price}</p>
             <p className="fs-6 fw-bold">Details:</p>
-            <p className="ms-4">{product.desc}</p>
+            {/* <p className="ms-4">{product.desc}</p> */}
+            <p className="ms-4">{product.description}</p>
             <ButtonGroup>
               <Button onClick={() => navigate(`/products/${id}/edit`)}>
                 Edit

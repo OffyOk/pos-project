@@ -5,7 +5,8 @@ import { addToCart, removeFromCart } from 'features/cart/cartSlice';
 const QuantityControl = ({ product }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.cart.products);
-  const orderProduct = products[product.sku];
+  // const orderProduct = products[product.sku];
+  const orderProduct = products[product.id];
 
   return (
     <Stack direction="horizontal">

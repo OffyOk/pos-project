@@ -1,6 +1,6 @@
 import ProductForm from './ProductForm';
-import axios from 'axios';
-import { omit } from 'lodash';
+// import axios from 'axios';
+// import { omit } from 'lodash';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -14,10 +14,13 @@ const EditProduct = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const { data } = await axios.get(`/products/${id}`);
-      const product = omit(data, ['id', 'category']);
-      console.log({ ...product, categoryId: data.category.id });
-      setProduct({ ...product, categoryId: data.category.id });
+      // const { data } = await axios.get(`/products/${id}`);
+      // const product = omit(data, ['id', 'category']);
+      // console.log({ ...product, categoryId: data.category.id });
+      // setProduct({ ...product, categoryId: data.category.id });
+      const res = await fetch(`${process.env.REACT_APP_API}/products/${id}`);
+      const data = await res.json();
+      setProduct(data);
     };
 
     fetchProduct();
@@ -29,10 +32,20 @@ const EditProduct = () => {
 
   const updateProduct = async (product) => {
     try {
-      await axios.patch(`/products/${id}`, product, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      // await axios.patch(`/products/${id}`, product, {
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //   },
+      // });
+      fetch(`${process.env.REACT_APP_API}/products/7`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          title: 'test product',
+          price: 13.5,
+          description: 'lorem ipsum set',
+          image: 'https://i.pravatar.cc',
+          category: 'electronic',
+        }),
       });
       navigate('/products');
       dispatch(

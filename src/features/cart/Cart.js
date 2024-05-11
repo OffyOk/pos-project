@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash';
 import { clear } from './cartSlice';
 import OrderDetails from './OrderDetails';
 import CustomerInfo from './CustomerInfo';
-import axios from 'axios';
+// import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
@@ -16,7 +16,19 @@ const Cart = () => {
 
   const save = async () => {
     const payload = { ...CustomerInfor, products: productItems };
-    await axios.post('/orders', payload);
+    // await axios.post('/orders', payload);
+    fetch('https://fakestoreapi.com/carts', {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: 5,
+        date: '2020-02-03',
+        products: [
+          { productId: 5, quantity: 1 },
+          { productId: 1, quantity: 5 },
+        ],
+      }),
+    });
+
     dispatch(clear());
     navigate('/products');
   };

@@ -17,7 +17,17 @@ const Layout = () => {
   const alert = useSelector((state) => state.ui.alert);
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar
+        bg="dark"
+        variant="dark"
+        expand="lg"
+        style={{
+          position: 'fixed',
+          top: '0',
+          width: '100%',
+          zIndex: '30',
+        }}
+      >
         <Container>
           <Navbar.Brand as={Link} to="/">
             Point of Sell
@@ -36,14 +46,14 @@ const Layout = () => {
               <Nav.Link as={Link} to="/cart">
                 Cart
               </Nav.Link>
-              <Nav.Link as={Link} to="/orders">
+              {/* <Nav.Link as={Link} to="/orders">
                 Orders
-              </Nav.Link>
+              </Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container className="mt-2">
+      <Container style={{ marginTop: '4.5rem' }}>
         <Outlet />
       </Container>
       <ToastContainer
@@ -74,7 +84,16 @@ const Layout = () => {
           className="text-center p-3"
           style={{ backgroundColor: 'rgba(33, 37, 41, 1)' }}
         >
-          © 2024 Copyright:
+          Get API Data from{' '}
+          <a
+            className="text-white"
+            href="https://fakestoreapi.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Fake Store
+          </a>{' '}
+          API Coding by{' '}
           <a
             className="text-white"
             href="https://www.linkedin.com/in/suthichai-srivatanasup/"

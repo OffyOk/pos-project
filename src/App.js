@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './features/ui/Layout';
 import Cart from './features/cart/Cart';
-import Orders from './features/cart/Orders';
+// import Orders from './features/cart/Orders';
 import Products from './features/product/Products';
 import NewProduct from './features/product/NewProduct';
 import ViewProduct from './features/product/ViewProduct';
@@ -26,7 +26,7 @@ function App() {
             <Route path="products/:id" element={<ViewProduct />}></Route>
             <Route path="products/:id/edit" element={<EditProduct />}></Route>
             <Route path="cart" element={<Cart />}></Route>
-            <Route path="orders" element={<Orders />}></Route>
+            {/* <Route path="orders" element={<Orders />}></Route> */}
             <Route index element={<Navigate to="/products" />}></Route>
           </Route>
         </Routes>

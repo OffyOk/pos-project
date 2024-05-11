@@ -16,7 +16,8 @@ const ProductItem = ({ product }) => {
           >
             <Card.Img
               variant="top"
-              src={`${product.image}`}
+              // src={`${product.image}`}
+              src={product.image}
               style={{ height: '75%', objectFit: 'contain' }}
             />
           </div>

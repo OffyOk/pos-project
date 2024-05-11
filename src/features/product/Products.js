@@ -28,14 +28,13 @@ const Products = () => {
     // หาอ่านเพิ่มได้ที่ลิงค์ล่างนี้
     // https://medium.com/thinc-org/callback-promise-async-await-%E0%B8%A7%E0%B8%B2%E0%B8%A2%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%A2-%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87-javascript-f5a842e59d9e
 
-    console.log(products);
+    // console.log(products);
   };
 
   useEffect(() => {
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(products);
 
   return (
     <>
@@ -53,6 +52,7 @@ const Products = () => {
       ) : (
         <Row xs={1} md={2} lg={3} className="g-2 py-2">
           {products.map((product) => (
+            // <ProductItem key={product.id} product={product} />
             <ProductItem key={product.id} product={product} />
           ))}
         </Row>
