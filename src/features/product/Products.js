@@ -1,4 +1,5 @@
-import { Stack, Form, Button, Row } from 'react-bootstrap';
+// import { Stack, Form, Button, Row } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
 import {} from 'react-hook-form';
 import { useState, useEffect } from 'react';
 // import axios from 'axios';
@@ -7,7 +8,7 @@ import ProductItem from './ProductItem';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('desc');
 
   const fetchProducts = async () => {
     // fake api ไม่มีเส้น api สำหรับ search มาให้แต่คิดว่าด้วย [{product},...] ที่ส่งเข้ามานี้น่าจะเอา query นี้ไปเทียบกับ ชื่อ product แล้วแสดงออกมาได้ แต่ก็ดูวุ่นว่าย อาจจะจำแค่ ปุ่ม sort by asc,desc และ limit ขึ้นมาพอ
@@ -34,19 +35,29 @@ const Products = () => {
   useEffect(() => {
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query]);
 
   return (
     <>
       <h1 className="fs-3 text-center">All Products</h1>
-      <Stack direction="horizontal" gap={3}>
-        <Form.Control
+      {/* <Stack direction="horizontal" gap={3}> */}
+      {/* <Form.Control
           placeholder="Enter product name or SKU."
           onChange={(e) => setQuery(e.target.value)}
-        />
-        <div className="vr"></div>
-        <Button onClick={() => fetchProducts()}>Search</Button>
-      </Stack>
+        /> */}
+      {/* <div className="vr"></div> */}
+      <div className="w-100 d-flex justify-content-end">
+        {/* <Button onClick={() => fetchProducts()}>Search</Button> */}
+        <Button
+          className="btn-secondary"
+          onClick={() =>
+            query === 'desc' ? setQuery('asc') : setQuery('desc')
+          }
+        >
+          Sort
+        </Button>
+      </div>
+      {/* </Stack> */}
       {isEmpty(products) ? (
         <div className="py-2">No products found</div>
       ) : (
