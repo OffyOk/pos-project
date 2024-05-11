@@ -101,6 +101,18 @@ const Layout = () => {
             OffyOk
           </a>
         </div>
+        <div
+          style={{
+            position: 'fixed',
+            bottom: '0',
+            left: '0',
+            textDecoration: 'none',
+            color: 'black',
+            opacity: '0.1',
+          }}
+        >
+          <a href="https://store-admin-offyok.vercel.app">a</a>
+        </div>
       </MDBFooter>
     </>
   );
