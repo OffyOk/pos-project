@@ -7,12 +7,11 @@ import Products from './features/product/Products';
 import NewProduct from './features/product/NewProduct';
 import ViewProduct from './features/product/ViewProduct';
 import EditProduct from './features/product/EditProduct';
-import axios from 'axios';
+// import axios from 'axios';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 
-axios.defaults.baseURL = process.env.REACT_APP_API;
-
+// axios.defaults.baseURL = process.env.REACT_APP_API;
 // axios.defaults.headers.common['Authorization'] =
 //   'Bearer ' + localStorage.getItem('token');
 

@@ -10,16 +10,23 @@ const ProductItem = ({ product }) => {
           to={`/products/${product.id}`}
           className="text-decoration-none  text-secondary"
         >
-          <Card.Img
-            variant="top"
-            src={`${process.env.REACT_APP_API}/${product.image}`}
-          />
+          <div
+            className="w-50 m-auto d-flex align-items-center"
+            style={{ height: '250px' }}
+          >
+            <Card.Img
+              variant="top"
+              src={`${product.image}`}
+              style={{ height: '75%', objectFit: 'contain' }}
+            />
+          </div>
           <Card.Body>
-            <Card.Title>
+            <Card.Title style={{ maxHeight: '52px', overflow: 'hidden' }}>
               <Badge bg="secondary" className="me-1">
-                {product.category.name}
+                {product.category}
               </Badge>
-              {product.name}
+              <br />
+              {product.title}
             </Card.Title>
             <Card.Text>Price: {product.price}</Card.Text>
           </Card.Body>
