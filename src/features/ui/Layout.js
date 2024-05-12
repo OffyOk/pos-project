@@ -29,7 +29,7 @@ const Layout = () => {
         }}
       >
         <Container>
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand as={Link} to="/Products">
             Point of Sell
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
